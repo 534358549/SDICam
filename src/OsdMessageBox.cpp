@@ -2,12 +2,18 @@
 #include <malloc.h>
 #include "OsdMessageBox.h"
 
+extern char g_strBinPath[];
+
 OsdMessageBox::OsdMessageBox(int vpssId, int handle)
 	: OsdZone(vpssId, handle, "messagebox", 7, 690, 300, 560, 320)
 {
 //	setTransperent(128, 64);
 //	setTextColor();
-	setBaseBitmap("messagebox.bmp");
+	char filename[256];
+	sprintf(filename, "%s/messagebox.bmp", g_strBinPath);
+
+	setBaseBitmap(filename);
+
 	initOsdZone();
 }
 

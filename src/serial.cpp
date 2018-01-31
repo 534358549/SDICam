@@ -188,7 +188,6 @@ void handleCmd(CtrlCmd *ctrlCmd)
 
 	handleKeyCode(ctrlCmd->keyboard);
 
-
 	g_lastKey = ctrlCmd->keyboard;
 }
 

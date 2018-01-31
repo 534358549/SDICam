@@ -141,7 +141,7 @@ int OSD_GetBitmapFromString(int ptSize, char *str, BITMAP_S *bitmap)
 
 	SDL_Color forecol=     { 0xFF, 0xFF, 0xFF, 0xFF };
 	//SDL_Color forecol=   { 0x00, 0x00, 0x00, 0 };
-	char *string="走近科学周年纪念版：王小宝吃西瓜不吃瓤";
+	char *string="走近科学周年纪念版";
 	text = TTF_RenderUTF8_Solid(font, string, forecol);
 
 	SDL_SaveBMP(text, "1.bmp");

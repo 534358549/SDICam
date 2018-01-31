@@ -2,6 +2,8 @@
 #include "OsdDirectionBox.h"
 #include "defines.h"
 
+extern char g_strBinPath[];
+
 OsdDirectionBox::OsdDirectionBox(int vpssId, int handle)
 	: OsdStateBox(vpssId, handle, "dirstate", 2, 10, 850, 880, 220)
 {
@@ -13,7 +15,10 @@ OsdDirectionBox::OsdDirectionBox(int vpssId, int handle)
 	setPos(IDX_DIR_UP_ANG, 390, 170, 92);
 	setPos(IDX_DIR_UP_SPEED, 650, 170, 92);
 
-	setBaseBitmap("leftdown.bmp");
+	char filename[256];
+	sprintf(filename, "%s/leftdown.bmp", g_strBinPath);
+
+	setBaseBitmap(filename);
 	initOsdZone();
 	resetWorkBitmap();
 

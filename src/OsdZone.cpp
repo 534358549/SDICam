@@ -10,6 +10,7 @@
 #include "loadbmp.h"
 
 #define PREFIX_CONF		""
+extern char g_strBinPath[];
 
 bool OsdZone::m_initTTF = false;
 //BITMAP_S OsdZone::m_bitmapBlank = {0, 0, 0, NULL};
@@ -20,7 +21,7 @@ OsdZone::OsdZone()
 */
 OsdZone::OsdZone(int vpssId, int handle, const char *name, int layer, int x, int y, int w, int h)
 {
-	sprintf(m_configFileName, "%s%s.conf", PREFIX_CONF, name);
+	sprintf(m_configFileName, "%s/%s%s.conf", g_strBinPath, PREFIX_CONF, name);
 	loadLocation(x, y, &m_posX, &m_posY);
 	printf("location of %s is: %d, %d\n", m_configFileName, m_posX, m_posY);
 	
@@ -305,8 +306,10 @@ BITMAP_S *OsdZone::genBmpFromString(const char *str, int size)
 	SDL_Surface *text, *temp;
 
 	strcpy(m_string, str);
+	char fontPath[256];
+	sprintf(fontPath, "%s/font.ttf", g_strBinPath);
 
-	font = TTF_OpenFont("font.ttf", size);
+	font = TTF_OpenFont(fontPath, size);
 	if ( font == NULL )
 	{
 		fprintf(stderr, "Couldn't load %d pt font from %s\n", size, SDL_GetError());
@@ -367,7 +370,10 @@ int OsdZone::showString(char *str, int size)
 
 	strcpy(m_string, str);
 
-	font = TTF_OpenFont("font.ttf", size);
+	char fontPath[256];
+	sprintf(fontPath, "%s/font.ttf", g_strBinPath);
+
+	font = TTF_OpenFont(fontPath, size);
 	if ( font == NULL )
 	{
 		fprintf(stderr, "Couldn't load %d pt font from %s\n", size, SDL_GetError());

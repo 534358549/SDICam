@@ -20,6 +20,8 @@
 #include "OsdDirectionBox.h"
 #include "OsdDirCircle.h"
 
+extern char g_strBinPath[];
+
 VIDEO_NORM_E gs_enNorm = VIDEO_ENCODING_MODE_AUTO;
 
 #define VPSS_BSTR_CHN     		0
@@ -674,21 +676,33 @@ void stopOSD()
 
 void startOSD()
 {
+	printf("start OSD...\n");
 	OsdZone::initStatic();
 
+	printf("create the OsdZone...\n");
 	g_osdZoneCross     = new OsdZone(g_currSdiInputId, 0, "cross", 0, 240, 150, 1600, 1200);
+	printf("create the OsdDirectionBox...\n");
 	g_osdZoneLeftDown  = new OsdDirectionBox(g_currSdiInputId, 1);
+	printf("create the OsdGunStateBox...\n");
 	g_osdZoneRightDown = new OsdGunStateBox(g_currSdiInputId, 2);
+	printf("create the OsdDirCircle...\n");
 	g_osdZoneDirCircle = new OsdDirCircle(g_currSdiInputId, 3);
 
+	printf("show cross zone\n");
 	g_osdZoneCross->initOsdZone();
-	g_osdZoneCross->setBaseBitmap("cross.bmp");
+	char bmpPath[256];
+	sprintf(bmpPath, "%s/cross.bmp", g_strBinPath);
+	g_osdZoneCross->setBaseBitmap(bmpPath);
 	g_osdZoneCross->show();
 
+	printf("show rightdown zone\n");
 	g_osdZoneRightDown->show();
+	printf("show leftdown zone\n");
 	g_osdZoneLeftDown->show();
+	printf("show circle zone\n");
 	g_osdZoneDirCircle->show();
 
+	printf("OSD is done\n");
 //	testOSD();
 }
 

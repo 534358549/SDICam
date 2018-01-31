@@ -10,6 +10,8 @@
 #define IDX_GUN_HAND	3
 #define IDX_GUN_BULLET	4
 
+extern char g_strBinPath[];
+
 OsdGunStateBox::OsdGunStateBox(int vpssId, int handle)
 	: OsdStateBox(vpssId, handle, "gunstate", 2, 1500, 750, 340, 408)
 {
@@ -21,7 +23,11 @@ OsdGunStateBox::OsdGunStateBox(int vpssId, int handle)
 	setPos(3, 180, 195, 140);
 	setPos(4, 180, 250, 140);
 
-	setBaseBitmap("rightdown.bmp");
+	char filename[256];
+	sprintf(filename, "%s/rightdown.bmp", g_strBinPath);
+
+	setBaseBitmap(filename);
+
 	initOsdZone();
 	resetWorkBitmap();
 
